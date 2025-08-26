@@ -1,40 +1,35 @@
-# Generate Image Captions
+# Image Caption Generator 🖼️✍️
 
-<img src="https://github.com/DanielaMorariu1990/Generate_image_captions/blob/main/demo.gif" width="700" height="350">
+An end-to-end deep learning project that automatically generates descriptive captions for images. The application is built with a **CNN-LSTM** architecture and deployed using a **Flask** web interface.
 
-## Description
+---
 
-The program takes an image from the Flicker8 image set and outputs a description of the picture it "sees". Currently it only works with Flicker8 images for the following reasons:
+## 🧠 Model Architecture
 
-1. The image feature vector extracted from InceptionV3 (please see arhitecture below) is pre-extracted for all Flicker8 images and stored on this repo. This could be easly converted in real time extractions for new images, on a better computer.
+The model uses a classic encoder-decoder architecture, which is a popular and effective approach for image captioning.
 
-2. The image descriptions (text generations) have been trained on the Flicker8 captions. This could be extended on a larger data set, like Flicker30. The steps are however the same, as in this repo.
+### 1. **Encoder: InceptionV3**
+* The encoder is a pre-trained **InceptionV3** model, a powerful Convolutional Neural Network (CNN).
+* It processes an input image and extracts its most important features, converting the image into a compact feature vector (an embedding). This vector represents the "meaning" of the image.
 
-I have used the following model arhitecture, as depicted in the picture below.
-<img src="https://github.com/DanielaMorariu1990/Generate_image_captions/blob/main/model_arhitecture.PNG" width="700" height="350">
+### 2. **Decoder: LSTM**
+* The decoder is a **Long Short-Term Memory (LSTM)** network, a type of Recurrent Neural Network (RNN).
+* It takes the image feature vector from the encoder and learns to generate a sequence of words (a caption) that accurately describes the image. The model is trained to predict the next word in a sentence, given the image and all the previous words.
 
-The interface is simple, and built in Flask (see gif).
+### 3. **Word Embeddings: Word2Vec**
+* **Word2Vec** is used to create pre-trained word embeddings. This helps the model understand the relationships between words, leading to more coherent and contextually relevant captions.
 
-For this pupose I have used the following tools:
+---
 
-- Python
-- Keras: InceptionV3, LSTM and Dense layers
-- word2vec, for pre-training word emedding
-- HTML, CSS, Flask
+## ⚙️ Tech Stack & Dependencies
 
-## How to use
+* **Backend:** Python, Keras (with TensorFlow backend), Flask
+* **Frontend:** HTML, CSS
+* **Dataset:** Flickr8k (containing 8,000 images with 5 captions each)
+* **Core Libraries:** `numpy`, `pandas`, `Pillow`, `tensorflow`, `keras`, `nltk`
 
-In a terminal:
+---
 
-1. Clone this repo: `git clone https://github.com/lorenanda/movie-recommender.git`
-2. Install the necessary libraries: `pip install -r requirements.txt`
-3. Make sure you are in the main directory Generate_image_captions
-4. Download the Flicker8 image set.
-5. Run these three commands:
-   - `export FLASK_APP=application.py`
-   - `export FLASK_DEBUG=1`
-   - `flask run`
-6. Open the listed localhost http://127.0.0.1:5000/ in a browser.
-7. Try out some phothos!
-
-_The project was tested on Chrome, Firefox and Opera!_
+```bash
+git clone [https://github.com/DanielaMorariu1990/Generate_image_captions.git](https://github.com/DanielaMorariu1990/Generate_image_captions.git)
+cd Generate_image_captions
